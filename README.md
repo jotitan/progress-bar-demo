@@ -7,4 +7,6 @@ Front simple page is made in React with [Axios](https://github.com/axios/axios) 
 
 Two implementations of backend is available : 
 * Golang : I use chanel and WaitGroup (/go-version)
-* Java : I use BlockingQueue,  ExecutorService and Spring mvc (/src)
+* Java : I use [BlockingQueue](http://tutorials.jenkov.com/java-util-concurrent/blockingqueue.html), ExecutorService and Spring mvc (/src)
+
+![Demo](front-demo.png)
