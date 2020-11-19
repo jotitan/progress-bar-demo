@@ -60,7 +60,7 @@ public class ProgressController {
             while(true) {
                 try {
                     String message = (String)queue.take();
-                    if(message == ""){
+                    if("".equals(message)){
                         writeMessage(out,"end","{\"end\":true}");
                         break;
                     }
@@ -75,8 +75,8 @@ public class ProgressController {
 
     private void writeMessage(OutputStream out, String event, String message){
         try{
-            out.write(String.format("event: %s\n",event).getBytes());
-            out.write(String.format("data: %s\n\n",message).getBytes());
+            out.write(String.format("event: %s%n",event).getBytes());
+            out.write(String.format("data: %s%n%n",message).getBytes());
             out.flush();
         }catch(IOException ioex){
             ioex.printStackTrace();

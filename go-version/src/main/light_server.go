@@ -153,17 +153,23 @@ func runTasks(nb,timeInMs,thread int, id string){
 }
 
 func launchTask(w http.ResponseWriter,r * http.Request){
-	nb := getValue(r.FormValue("nb"),1)
-	timeInMs := getValue(r.FormValue("time"),1000)
-	thread := getValue(r.FormValue("thread"),1)
-	id := nextValue()
-	go runTasks(nb,timeInMs,thread,id)
+	nb,timeInMs,nbThreads := getParameters(r)
+	id := generateUniqueId()
+	go runTasks(nb,timeInMs,nbThreads,id)
+
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(fmt.Sprintf("{\"id\":\"%s\"}",id)))
 }
 
+func getParameters(r * http.Request)(int,int,int){
+	return getValue(r.FormValue("nb"),1),
+	getValue(r.FormValue("time"),1000),
+	getValue(r.FormValue("thread"),1)
+}
+
 var counter = int32(0)
-func nextValue()string{
+func generateUniqueId()string{
 	id :=  int(atomic.AddInt32(&counter,1))
 	return fmt.Sprintf("%d",id)
 }

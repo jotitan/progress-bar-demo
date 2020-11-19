@@ -4,7 +4,7 @@ import axios from "axios";
 import 'antd/dist/antd.css';
 import {Progress} from "antd";
 
-const backendUrl = "http://localhost:8080";
+const backendUrl = "http://localhost:9004";
 
 function App() {
   const [nb,setNb] = useState(1);
